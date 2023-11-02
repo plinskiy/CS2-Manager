@@ -22,9 +22,12 @@ public class Cs2ServiceImpl implements Cs2Service {
     @Override
     public String chatCommand(String text) throws IOException {
         Rcon rcon = Rcon.open(applicationProperties.getHostname(), applicationProperties.getPort());
-        String result = Arrays.stream(COMMANDS).anyMatch(text::contains) ? "contains" : "not contains";
-        log.info(rcon.authenticate(applicationProperties.getPassword()) ? rcon.sendCommand(applicationProperties.getCommandToExecute()) : "Failed to authenticate");
-        return result;
+        if (Arrays.stream(COMMANDS).anyMatch(text::contains)) {
+            log.info(rcon.authenticate(applicationProperties.getPassword()) ? rcon.sendCommand(applicationProperties.getCommandToExecute()) : "Failed to authenticate");
+        } else {
+            log.info("Skipped");
+        }
+        return "OK";
     }
 
 }

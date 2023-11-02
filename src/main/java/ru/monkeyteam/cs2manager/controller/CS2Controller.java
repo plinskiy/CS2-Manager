@@ -22,7 +22,7 @@ public class CS2Controller {
 
     @PostMapping(value = "/log", consumes = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> logger(@RequestBody String text) throws IOException {
-        log.info(text);
+        log.info("Incoming text : " + text);
         return ResponseEntity.ok(cs2Service.chatCommand(text));
     }
 
