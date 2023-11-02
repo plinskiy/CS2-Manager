@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.monkeyteam.cs2manager.service.Cs2Service;
 
+import java.io.IOException;
+
 @Log4j2
 @RestController
 @RequestMapping("/api")
@@ -19,9 +21,9 @@ public class CS2Controller {
     private final Cs2Service cs2Service;
 
     @PostMapping(value = "/log", consumes = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> logger(@RequestBody String log) {
-        CS2Controller.log.info(log);
-        return ResponseEntity.ok(cs2Service.chatCommand(log));
+    public ResponseEntity<String> logger(@RequestBody String text) throws IOException {
+        log.info(text);
+        return ResponseEntity.ok(cs2Service.chatCommand(text));
     }
 
 }

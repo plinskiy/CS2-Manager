@@ -1,1 +1,10 @@
-
+logging:
+  level:
+    root: info
+application:
+  hostname:
+  port:
+  password:
+  command-to-execute:
+server:
+  port: 8090
