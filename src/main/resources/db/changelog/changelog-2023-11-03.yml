@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: anomaly
+      changes:
+        - createTable:
+            tableName: game-config
+            columns:
+              - column:
+                  name: id
+                  type: bigint unsigned
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: command
+                  type: json
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: anomaly
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint unsigned
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: login
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: steam-id
+                  type: bigint unsigned
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: role
+                  type: enum("user", "admin")
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is-capitan
+                  type: tinyint(1)
+                  defaultValue: '0'

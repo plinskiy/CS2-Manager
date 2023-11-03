@@ -1,0 +1,24 @@
+logging:
+  level:
+    root: info
+    ru.monkeyteam.cs2manager: info
+spring:
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://plinskiy.space:3306/cs2_manager
+    username: cs2_manager
+    password: DNREzCHcrB9aT4tv
+  liquibase:
+    change-log: classpath:db/master.yml
+application:
+  hostname: localhost
+  port: 0
+  password: change-me
+  command-to-execute: change-me
+server:
+  port: 8090

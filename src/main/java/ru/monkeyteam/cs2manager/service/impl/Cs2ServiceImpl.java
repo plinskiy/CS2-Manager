@@ -15,7 +15,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class Cs2ServiceImpl implements Cs2Service {
 
-    private static final String[] COMMANDS = new String[]{"!ready", ".ready", ".r", "!r", "!switch", ".switch", "!stay", ".stay"};
+    private static final String[] COMMANDS = new String[]{"!ready", ".ready", "!switch", ".switch", "!stay", ".stay"};
 
     private final ApplicationProperties applicationProperties;
 
