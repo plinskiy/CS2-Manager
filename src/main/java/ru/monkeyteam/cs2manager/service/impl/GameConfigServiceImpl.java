@@ -54,8 +54,8 @@ public class GameConfigServiceImpl implements GameConfigService {
     }
 
     @Override
-    public void exec(GameConfigRequest request) {
-        Optional<GameConfig> gameConfig = gameConfigRepository.findByName(request.getName());
+    public void exec(String name) {
+        Optional<GameConfig> gameConfig = gameConfigRepository.findByName(name);
 	if (gameConfig.isEmpty()) {
 	    log.warn("КОФНФИГУЛИ ДОСВИДУЛИ");
             return;

@@ -52,9 +52,9 @@ public class GameConfigController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/game-config/exec")
-    public ResponseEntity<Void> execGameConfig(@RequestBody GameConfigRequest request) {
-        gameConfigService.exec(request);
+    @PatchMapping("/game-config/exec/{name}")
+    public ResponseEntity<Void> execGameConfig(@PathVariable String name) {
+        gameConfigService.exec(name);
         return ResponseEntity.ok().build();
     }
 

@@ -17,6 +17,6 @@ public interface GameConfigService {
 
     void delete(GameConfig gameConfig);
 
-    void exec(GameConfigRequest request);
+    void exec(String name);
 
 }
