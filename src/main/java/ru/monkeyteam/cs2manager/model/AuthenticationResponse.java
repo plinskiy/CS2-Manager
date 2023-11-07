@@ -12,6 +12,8 @@ import ru.monkeyteam.cs2manager.domain.Role;
 @AllArgsConstructor
 public class AuthenticationResponse {
 
+    private Long id;
+
     private String login;
 
     private Long steamId;
