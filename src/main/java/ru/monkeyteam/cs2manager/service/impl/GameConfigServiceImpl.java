@@ -2,7 +2,9 @@ package ru.monkeyteam.cs2manager.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import nl.vv32.rcon.Rcon;
 import org.springframework.stereotype.Service;
+import ru.monkeyteam.cs2manager.config.ApplicationProperties;
 import ru.monkeyteam.cs2manager.domain.GameConfig;
 import ru.monkeyteam.cs2manager.model.GameConfigRequest;
 import ru.monkeyteam.cs2manager.repository.GameConfigRepository;
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class GameConfigServiceImpl implements GameConfigService {
 
     private final GameConfigRepository gameConfigRepository;
+
+    private final ApplicationProperties applicationProperties;
 
     @Override
     public Iterable<GameConfig> findGameConfig() {
@@ -48,4 +52,21 @@ public class GameConfigServiceImpl implements GameConfigService {
     public void delete(GameConfig gameConfig) {
         gameConfigRepository.delete(gameConfig);
     }
+
+    @Override
+    public void exec(GameConfigRequest request) {
+        Optional<GameConfig> gameConfig = gameConfigRepository.findByName(request.getName());
+	if (gameConfig.isEmpty()) {
+	    log.warn("КОФНФИГУЛИ ДОСВИДУЛИ");
+            return;
+	}
+        try {
+            Rcon rcon = Rcon.open(applicationProperties.getHostname(), applicationProperties.getPort());
+            rcon.authenticate(applicationProperties.getPassword());
+            rcon.sendCommand(gameConfig.get().getCommand());
+        } catch (Exception e) {
+            log.error(e, e);
+        }
+    }
+
 }

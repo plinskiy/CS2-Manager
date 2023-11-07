@@ -16,4 +16,7 @@ public interface GameConfigService {
     GameConfig update(GameConfigRequest request);
 
     void delete(GameConfig gameConfig);
+
+    void exec(GameConfigRequest request);
+
 }
