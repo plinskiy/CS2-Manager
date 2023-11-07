@@ -64,6 +64,7 @@ public class GameConfigServiceImpl implements GameConfigService {
             Rcon rcon = Rcon.open(applicationProperties.getHostname(), applicationProperties.getPort());
             rcon.authenticate(applicationProperties.getPassword());
             rcon.sendCommand(gameConfig.get().getCommand());
+            log.info("Команда успешно применена {}", gameConfig.get().getCommand());
         } catch (Exception e) {
             log.error(e, e);
         }
