@@ -43,7 +43,7 @@ public class GameConfigController {
     }
 
     @DeleteMapping("/game-config/{name}")
-    public ResponseEntity<GameConfig> getGameConfig(@PathVariable String name) {
+    public ResponseEntity<GameConfig> deleteGameConfigByName(@PathVariable String name) {
         Optional<GameConfig> gameConfigs = gameConfigService.findGameConfigByName(name);
         if (gameConfigs.isPresent()) {
             gameConfigService.delete(gameConfigs.get());
