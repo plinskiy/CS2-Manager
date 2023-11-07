@@ -4,24 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.monkeyteam.cs2manager.domain.Role;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse {
+public class GameConfigRequest {
 
     private Long id;
 
-    private String login;
+    private String name;
 
-    private Long steamId;
-
-    private Role role;
-
-    private Boolean isCapitan;
-
-    private String token;
+    private String command;
 
 }

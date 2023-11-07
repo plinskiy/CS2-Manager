@@ -3,12 +3,12 @@ package ru.monkeyteam.cs2manager.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.monkeyteam.cs2manager.domain.GameConfig;
+import ru.monkeyteam.cs2manager.model.GameConfigRequest;
 import ru.monkeyteam.cs2manager.service.GameConfigService;
+
+import java.util.Optional;
 
 @Log4j2
 @RestController
@@ -26,8 +26,30 @@ public class GameConfigController {
 
     @GetMapping("/game-config/{name}")
     public ResponseEntity<GameConfig> getGameConfigByName(@PathVariable String name) {
-        GameConfig gameConfig = gameConfigService.findGameConfigByName(name);
+        GameConfig gameConfig = gameConfigService.findGameConfigByName(name).orElseThrow();
         return ResponseEntity.ok(gameConfig);
+    }
+
+    @PostMapping("/game-config")
+    public ResponseEntity<GameConfig> createGameConfig(@RequestBody GameConfigRequest request) {
+        GameConfig gameConfig = gameConfigService.create(request);
+        return ResponseEntity.ok(gameConfig);
+    }
+
+    @PutMapping("/game-config")
+    public ResponseEntity<GameConfig> updateGameConfig(@RequestBody GameConfigRequest request) {
+        GameConfig gameConfig = gameConfigService.update(request);
+        return ResponseEntity.ok(gameConfig);
+    }
+
+    @DeleteMapping("/game-config/{name}")
+    public ResponseEntity<GameConfig> getGameConfig(@PathVariable String name) {
+        Optional<GameConfig> gameConfigs = gameConfigService.findGameConfigByName(name);
+        if (gameConfigs.isPresent()) {
+            gameConfigService.delete(gameConfigs.get());
+            return ResponseEntity.ok(gameConfigs.get());
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }
