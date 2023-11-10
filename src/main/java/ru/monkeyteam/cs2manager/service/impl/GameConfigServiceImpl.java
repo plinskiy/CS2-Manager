@@ -61,10 +61,14 @@ public class GameConfigServiceImpl implements GameConfigService {
             return;
 	}
         try {
+            String[] commands = gameConfig.get().getCommand().split("\\r?\\n");
             Rcon rcon = Rcon.open(applicationProperties.getHostname(), applicationProperties.getPort());
             rcon.authenticate(applicationProperties.getPassword());
-            rcon.sendCommand(gameConfig.get().getCommand());
-            log.info("Команда успешно применена {}", gameConfig.get().getCommand());
+            for (String command: commands) {
+                rcon.sendCommand(command);
+                log.info("Команда успешно применена {}", command);
+            }
+
         } catch (Exception e) {
             log.error(e, e);
         }
